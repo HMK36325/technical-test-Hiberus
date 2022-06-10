@@ -1,26 +1,24 @@
-import React, { useState } from "react";
-import { Form, Button} from "react-bootstrap";
-import { Link } from "wouter";
+import React, { useEffect, useState } from "react";
+import useUser from "hooks/useUser";
+import { useLocation } from "wouter";
+import { Form, Button, Spinner } from "react-bootstrap";
 
 export default function Login() {
     const [email, setEmail] = useState("");
+    const [, navigate] = useLocation();
     const [password, setPassword] = useState("");
-    /*   const [, navigate] = useLocation();
-      const { isLogged, login, isLoginLoading, hasLoginError ,isBanned } = useUser(); */
+    const { login, loginState, currentUser } = useUser();
 
-    /*   useEffect(() => {
-        if (isLogged) {
-          if (!isFromPortal) {
-            navigate("/")
-          }
-          onLogin && onLogin()
-        }
-      }, [isLogged, navigate, isFromPortal, onLogin]); */
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        //login({ email, password });
+        login({ email, password });
     };
+
+    useEffect(() => {
+        if (currentUser) navigate('/')
+    }, [loginState, navigate, currentUser])
+
     return (
         <div className="d-flex justify-content-center align-items-center flex-column">
             <Form onSubmit={handleSubmit} className="mt-3 login-form">
@@ -46,13 +44,12 @@ export default function Login() {
                         type="password"
                         placeholder="Password"
                     />
+                    {loginState.error && <small className="form-error">Credentials are invalid ⚠️</small>}
                 </Form.Group>
-
                 <Button type="submit" className="mt-3 mb-3 w-100 btn-dark">
-                    Login
+                    {loginState.loading ? <Spinner animation="border" /> : <p className="mb-1 mt-1">Iniciar Sesión</p>}
                 </Button>
-                <p className="text-center">¿No tienes cuenta?<Link to="/register"> Registrate aquí...</Link></p>
             </Form>
-        </div>
+        </div >
     );
 }

@@ -6,6 +6,12 @@
   padding: 1rem;
 }
 
-form label{
-    font-weight: bold !important;
+form label {
+  font-weight: bold !important;
+}
+
+.form-error {
+  color: red;
+  font-size: 90%;
+  margin-left: 0.5em;
 }

@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import useUser from "hooks/useUser";
+import React from "react";
 import { Navbar, Container, NavDropdown, ButtonGroup, Button, Nav } from "react-bootstrap";
 
 export default function HeaderNav() {
-    const [isLogged,] = useState(false)
+    const { currentUser, logout } = useUser();
+
+    const handleLogOut = (e) => {
+        logout();
+    }
+
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
@@ -13,11 +19,11 @@ export default function HeaderNav() {
                         <Nav.Link href="/users">Users</Nav.Link>
                     </Nav>
                     <Nav>
-                        {isLogged ? (
+                        {currentUser ? (
                             <NavDropdown
-                                title="user"
+                                title={currentUser.name ? currentUser.name : 'user'}
                                 id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="#">
+                                <NavDropdown.Item href="#" onClick={handleLogOut}>
                                     LogOut↩️
                                 </NavDropdown.Item>
                             </NavDropdown>
