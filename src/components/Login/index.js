@@ -22,9 +22,6 @@ export default function Login() {
     return (
         <div className="d-flex justify-content-center align-items-center flex-column">
             <Form onSubmit={handleSubmit} className="mt-3 login-form">
-                <div className="login-title mt-3 mb-3">
-                    <h3 className="text-center">Log In</h3>
-                </div>
                 <Form.Group className="input-form mb-3">
                     <Form.Label className="m-2">Email</Form.Label>
                     <Form.Control
