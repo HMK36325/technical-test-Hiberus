@@ -5,7 +5,7 @@ import ReactPaginate from "react-paginate";
 import useUserCards from "hooks/useUserCards";
 
 export default function ListOfUsers() {
-    const { users, loading, totalPages, page, setPage, setIsUserDeleted } = useUserCards();
+    const { users, loading, totalPages, page, setPage, setIsUserModify } = useUserCards();
 
     const handlePageClick = (data) => {
         console.log(data.nextSelectedPage)
@@ -40,7 +40,7 @@ export default function ListOfUsers() {
             : <Row>
                 {users.length > 0 && users.map((user) => {
                     return <Col lg="3" md="4" key={user.id}>
-                        <UserCard user={user} key={user.id} setIsUserDeleted={setIsUserDeleted} />
+                        <UserCard user={user} key={user.id} setIsUserModify={setIsUserModify} />
                     </Col>
                 })}
             </Row>}

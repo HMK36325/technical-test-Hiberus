@@ -1,0 +1,30 @@
+.my-modal {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 4;
+  }
+  
+  .my-modal-content {
+    border-radius: 10%;
+    background: #e7e7e7;
+    max-width: 40vh;
+    width: 100%;
+    margin: 10vh auto;
+    position: relative;
+  }
+  
+  .my-modal-content .btn {
+    display: block;
+    font-size: 150%;
+  }
+  
+  .info-modal {
+    text-align: center;
+    margin: 0.4em !important;
+    padding: 1em !important;
+  }

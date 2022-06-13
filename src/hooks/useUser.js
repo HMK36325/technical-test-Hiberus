@@ -3,6 +3,7 @@ import { useLocation } from "wouter"
 import deleteUserService from "services/delete"
 import loginService from "services/login"
 import registerService from "services/register"
+import updateService from "services/update"
 import Context from "context/userContext"
 
 export default function useUser() {
@@ -43,10 +44,19 @@ export default function useUser() {
             })
     }, [])
 
+    const updateUser = useCallback(({ user, setFieldError, setSubmitting, onUpdate }) => {
+        updateService({ userToUpdate: user, jwt: currentUser.jwt })
+            .then(() => onUpdate())
+            .catch(err => {
+                setFieldError('email', 'Email already in use ⚠️')
+                setSubmitting(false)
+            })
+    }, [currentUser])
+
     const deleteUser = useCallback(({ userId }) => {
         deleteUserService({ userId, jwt: currentUser.jwt })
     }, [currentUser])
 
 
-    return { login, logout, register, deleteUser, loginState, currentUser }
+    return { login, logout, register, deleteUser, updateUser, loginState, currentUser }
 }

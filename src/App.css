@@ -36,3 +36,13 @@ form label {
   left: 50%;
   margin: -25px 0 0 -25px;
 }
+a {
+  text-decoration: none !important;
+}
+
+@media (max-width: 390px) {
+  .register-form,
+  .login-form {
+    min-width: 260px;
+  }
+}

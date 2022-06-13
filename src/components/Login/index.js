@@ -3,7 +3,7 @@ import useUser from "hooks/useUser";
 import { useLocation } from "wouter";
 import { Form, Button, Spinner } from "react-bootstrap";
 
-export default function Login() {
+export default function Login({ onLogin, isFromModal }) {
     const [email, setEmail] = useState("");
     const [, navigate] = useLocation();
     const [password, setPassword] = useState("");
@@ -16,8 +16,12 @@ export default function Login() {
     };
 
     useEffect(() => {
-        if (currentUser) navigate('/')
-    }, [loginState, navigate, currentUser])
+        if (currentUser) {
+            if (isFromModal) navigate('/users')
+            else navigate('/')
+            onLogin && onLogin()
+        }
+    }, [loginState, navigate, currentUser, isFromModal, onLogin])
 
     return (
         <div className="d-flex justify-content-center align-items-center flex-column">
